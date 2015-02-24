@@ -12,7 +12,7 @@ var EightyApp = function() {
 		$html.filter('#ListViewInner > li').each(function(i, obj) {
 			var product = {};
 			product.name = $(this).filter('.lvtitle a').text();
-			product.url = $(this).filter('.lvtitle a').attr('href');
+			// product.url = $(this).filter('.lvtitle a').attr('href');
 			product.price = $(this).filter('.lvprice > span').clone().children().remove().end().text();
 			products.push(product);
 		});
