@@ -2,7 +2,6 @@
 
 var EightyApp = function() {
 	this.processDocument = function(html, url, headers, status, jQuery) {
-		// return html;
 		var app = this;
 		$ = jQuery;
 		var $html = app.parseHtml(html, $);
@@ -11,9 +10,9 @@ var EightyApp = function() {
 		var products = [];
 		$html.filter('#ListViewInner > li').each(function(i, obj) {
 			var product = {};
-			product.name = $(this).filter('.lvtitle a').text();
-			// product.url = $(this).filter('.lvtitle a').attr('href');
-			product.price = $(this).filter('.lvprice > span').clone().children().remove().end().text();
+			product.url = app.makeLink(url, $(this).filter('.lvtitle a').attr('href'));
+			product.name = $(this).filter('.lvtitle a').clone().children().remove().end().text().trim();
+			product.price = $(this).filter('.lvprice > span').text().trim();
 			products.push(product);
 		});
 		object.products = products;
@@ -27,7 +26,7 @@ var EightyApp = function() {
 		var $html = app.parseHtml(html, $);
 		var links = [];
 
-		// gets all links in the html document
+		// gets all product links in the search result
 		$html.find('.lvtitle a').each(function(i, obj) {
 			var link = app.makeLink(url, $(this).attr('href'));
 			if(link !== null) {
